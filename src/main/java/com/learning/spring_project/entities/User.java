@@ -16,7 +16,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String name;
 	private String email;
 	private String phone;
@@ -24,8 +24,7 @@ public class User implements Serializable{
 		
 	public User() {}
 
-	public User(long id, String name, String email, String phone, String password) {
-		super();
+	public User(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -90,6 +89,10 @@ public class User implements Serializable{
 		return Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(phone, other.phone);
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password=" + password
+				+ "]";
+	}	
 }
