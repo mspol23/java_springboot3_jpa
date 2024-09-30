@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.learning.spring_project.entities.enums.OrderStatus;
 
 import jakarta.persistence.CascadeType;
@@ -42,7 +41,6 @@ public class Order implements Serializable {
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
 	
-	@JsonIgnore
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private Payment payment;
 
@@ -101,6 +99,14 @@ public class Order implements Serializable {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	public Double getTotal() {
+		Double total = 0.0;
+		for(OrderItem x : items) {
+			total += x.getSubTotal();
+		}
+		return total;
 	}
 
 	@Override
